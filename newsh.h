@@ -87,29 +87,7 @@ do {
 
 }
 bool shell::launch_process(std::vector<std::string>& args) {
-  //const char* bin = args[0].c_str();
-  //std::cout << bin << std::endl;
-  //std::vector<char*> v;
   int status;
-  /*for (const auto& k : args){
-    char* buff = new char[k.size()+1];
-    strcpy(buff, k.c_str());
-    v.push_back(buff);
-  }
-
-  char** argv = new char* [v.size()+1];
-  int count = 0;
-  for (const auto& i : v){
-    argv[count] = i;
-    count++;
-  }*/
-  /*char** argv = new char* [args.size()];
-  char* p;
-  for (int i = 0; i < args.size(); i++){
-    p = new char [args[i].size()];
-    strcpy(p, args[i].c_str());
-    argv[i] = p;
-  }*/
   char** argv = stringutil::str_vector_toCSTR(args);
   pid_t pid, wpid;
   pid = fork();
@@ -120,12 +98,7 @@ bool shell::launch_process(std::vector<std::string>& args) {
             std::cout << argv[i] << " ";
           }
       }
-  for (int i = 0; i < args.size(); i++){
-          if (argv[i] != NULL){
-            delete [] argv[i];
-        }
-      }
-      //exit(-1);
+      exit(-1);
   } else if(pid < 0){
     std::cerr << "ERROR FORKING" << std::endl;
     return false;
