@@ -1,0 +1,11 @@
+CC=g++
+CFLAGS=-std=c++14
+DEPS = builtins.h, newsh.h, stringutil.h
+OBJ = main.o
+
+%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+hellomake: $(OBJ)
+	g++ -o $@ $^ $(CFLAGS)
+
